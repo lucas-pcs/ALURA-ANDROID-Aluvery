@@ -1,5 +1,6 @@
 package br.com.lucaspcs.aluvery
 
+import android.content.res.Configuration
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -17,30 +18,32 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             AluveryTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Greeting("Android")
+                Surface {
+                    FirstComposable()
                 }
             }
+        }
+
+    }
+}
+
+@Preview(name = "FirstComposablePreview",
+    showSystemUi = true)
+@Composable
+fun FirstComposablePreview() {
+    AluveryTheme {
+        Surface {
+            FirstComposable()
         }
     }
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
+fun FirstComposable() {
     AluveryTheme {
-        Greeting("Android")
+        Surface {
+            Text("First Text")
+        }
     }
 }
+
