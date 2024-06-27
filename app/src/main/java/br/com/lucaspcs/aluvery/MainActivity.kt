@@ -23,6 +23,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -104,12 +106,13 @@ fun ProductItem() {
 
     Surface(
         shape = RoundedCornerShape(15.dp),
-        shadowElevation = 8.dp
+        shadowElevation = 4.dp
     ) {
         Column(
             modifier = Modifier
                 .width(200.dp)
                 .heightIn(250.dp, 300.dp)
+                .verticalScroll(rememberScrollState())
         ) {
             Box(
                 modifier = Modifier
@@ -137,22 +140,37 @@ fun ProductItem() {
 
             Spacer(modifier = Modifier.height(imageSize / 2))
 
-            Column(modifier = Modifier.padding(16.dp)) {
+            Column(
+
+            ) {
 
                 Text(
                     text = LoremIpsum(50).values.first(),
                     fontSize = 18.sp,
                     fontWeight = FontWeight(700),
                     maxLines = 2,
-                    overflow = TextOverflow.Ellipsis
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier.padding(16.dp)
                 )
 
                 Text(
                     text = "R$ 14,99",
-                    Modifier.padding(top = 8.dp),
+                    modifier = Modifier.padding(start = 16.dp, end = 16.dp),
                     fontSize = 14.sp,
                     fontWeight = FontWeight(400)
                 )
+
+                Text(
+                    text = LoremIpsum(50).values.first(),
+                    modifier = Modifier
+                        .offset(y = 45.dp)
+                        .background(
+                            MaterialTheme.colorScheme.primary
+                        )
+                        .padding(start = 16.dp, end = 16.dp, top = 8.dp, bottom = 16.dp),
+                    color = MaterialTheme.colorScheme.onPrimary
+                )
+                Spacer(modifier = Modifier.padding(all = 8.dp))
 
             }
 
