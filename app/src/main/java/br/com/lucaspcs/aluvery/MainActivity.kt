@@ -6,6 +6,8 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -18,6 +20,7 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Surface
@@ -46,8 +49,7 @@ class MainActivity : ComponentActivity() {
             AluveryTheme {
                 Surface {
                     Column {
-                        ProductItem()
-                        ProductItemKit()
+                        ProductSection()
                     }
                 }
             }
@@ -56,9 +58,40 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@Preview(name = "systemUI", showSystemUi = true, showBackground = true)
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, widthDp = 1000)
+@Composable
+private fun ProductSectionPreview() {
+    ProductSection()
+}
+
+@Composable
+fun ProductSection() {
+    Column(modifier = Modifier.padding(top = 8.dp, bottom = 8.dp)) {
+
+        Text(
+            text = "Promoções", modifier = Modifier.padding(start = 16.dp),
+            fontWeight = FontWeight(400),
+            fontSize = 18.sp
+        )
+
+        Row(
+            modifier = Modifier
+                .padding(top = 8.dp, bottom = 8.dp)
+                .horizontalScroll(state = rememberScrollState())
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            Spacer(modifier = Modifier)
+            ProductItem()
+            ProductItem()
+            ProductItem()
+            Spacer(modifier = Modifier)
+        }
+
+    }
+}
+
 @Composable
 fun ProductItemPreview() {
     ProductItem()
@@ -70,7 +103,6 @@ fun ProductItem() {
     val imageSize = 100.dp
 
     Surface(
-        modifier = Modifier.padding(8.dp),
         shape = RoundedCornerShape(15.dp),
         shadowElevation = 8.dp
     ) {
@@ -129,7 +161,6 @@ fun ProductItem() {
 
 }
 
-@Preview
 @Composable
 fun ProductItemKitPreview() {
     ProductItemKit()
@@ -202,6 +233,5 @@ fun ProductItemKit() {
             )
         }
     }
-
 
 }
