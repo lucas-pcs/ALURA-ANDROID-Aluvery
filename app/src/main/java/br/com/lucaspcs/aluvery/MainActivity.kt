@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
@@ -24,16 +25,14 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -42,7 +41,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import br.com.lucaspcs.aluvery.extensions.toBrazilianCurrency
+import br.com.lucaspcs.aluvery.model.Product
 import br.com.lucaspcs.aluvery.ui.theme.AluveryTheme
+import java.math.BigDecimal
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,12 +53,30 @@ class MainActivity : ComponentActivity() {
             AluveryTheme {
                 Surface {
                     Column {
-                        ProductSection()
+                        App()
                     }
                 }
             }
         }
 
+    }
+
+}
+
+@Preview(showSystemUi = true)
+@Composable
+private fun App() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(
+                rememberScrollState()
+            ),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        ProductSection("Promoções")
+        ProductSection("Doces")
+        ProductSection("Bebidas")
     }
 }
 
@@ -64,15 +84,15 @@ class MainActivity : ComponentActivity() {
 @Preview(showBackground = true, widthDp = 1000)
 @Composable
 private fun ProductSectionPreview() {
-    ProductSection()
+    ProductSection("Promoções")
 }
 
 @Composable
-fun ProductSection() {
+fun ProductSection(sectionName: String) {
     Column(modifier = Modifier.padding(top = 8.dp, bottom = 8.dp)) {
 
         Text(
-            text = "Promoções", modifier = Modifier.padding(start = 16.dp),
+            text = sectionName, modifier = Modifier.padding(start = 16.dp),
             fontWeight = FontWeight(400),
             fontSize = 18.sp
         )
@@ -85,9 +105,9 @@ fun ProductSection() {
             horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             Spacer(modifier = Modifier)
-            ProductItem()
-            ProductItem()
-            ProductItem()
+            ProductItem(Product("Burguer", BigDecimal(19.90), R.drawable.burger))
+            ProductItem(Product("Fries", BigDecimal(9.90), R.drawable.fries))
+            ProductItem(Product("Pizza", BigDecimal(15.90), R.drawable.pizza))
             Spacer(modifier = Modifier)
         }
 
@@ -96,11 +116,11 @@ fun ProductSection() {
 
 @Composable
 fun ProductItemPreview() {
-    ProductItem()
+    ProductItem(Product("Pizza", BigDecimal(15.90), R.drawable.pizza))
 }
 
 @Composable
-fun ProductItem() {
+fun ProductItem(product: Product) {
 
     val imageSize = 100.dp
 
@@ -112,7 +132,6 @@ fun ProductItem() {
             modifier = Modifier
                 .width(200.dp)
                 .heightIn(250.dp, 300.dp)
-                .verticalScroll(rememberScrollState())
         ) {
             Box(
                 modifier = Modifier
@@ -128,13 +147,14 @@ fun ProductItem() {
                     )
             ) {
                 Image(
-                    painter = painterResource(id = R.drawable.ic_launcher_background),
+                    painter = painterResource(id = product.image),
                     contentDescription = null,
                     modifier = Modifier
                         .offset(y = imageSize / 2)
                         .clip(CircleShape)
                         .size(imageSize)
-                        .align(Alignment.Center)
+                        .align(Alignment.Center),
+                    contentScale = ContentScale.Crop
                 )
             }
 
@@ -145,7 +165,7 @@ fun ProductItem() {
             ) {
 
                 Text(
-                    text = LoremIpsum(50).values.first(),
+                    text = product.name,
                     fontSize = 18.sp,
                     fontWeight = FontWeight(700),
                     maxLines = 2,
@@ -154,22 +174,12 @@ fun ProductItem() {
                 )
 
                 Text(
-                    text = "R$ 14,99",
+                    text = product.price.toBrazilianCurrency(),
                     modifier = Modifier.padding(start = 16.dp, end = 16.dp),
                     fontSize = 14.sp,
                     fontWeight = FontWeight(400)
                 )
 
-                Text(
-                    text = LoremIpsum(50).values.first(),
-                    modifier = Modifier
-                        .offset(y = 45.dp)
-                        .background(
-                            MaterialTheme.colorScheme.primary
-                        )
-                        .padding(start = 16.dp, end = 16.dp, top = 8.dp, bottom = 16.dp),
-                    color = MaterialTheme.colorScheme.onPrimary
-                )
                 Spacer(modifier = Modifier.padding(all = 8.dp))
 
             }
