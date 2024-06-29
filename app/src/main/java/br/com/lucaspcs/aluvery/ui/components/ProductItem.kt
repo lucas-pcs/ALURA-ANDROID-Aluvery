@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -32,6 +33,8 @@ import androidx.compose.ui.unit.sp
 import br.com.lucaspcs.aluvery.R
 import br.com.lucaspcs.aluvery.extensions.toBrazilianCurrency
 import br.com.lucaspcs.aluvery.model.Product
+import br.com.lucaspcs.aluvery.sampledata.sampleProducts
+import coil.compose.AsyncImage
 import java.math.BigDecimal
 
 @Composable
@@ -55,21 +58,22 @@ fun ProductItem(product: Product) {
                     .background(
                         brush = Brush.horizontalGradient(
                             colors = listOf(
-                                colorResource(id = R.color.purple_500),
-                                colorResource(id = R.color.teal_200)
+                                MaterialTheme.colorScheme.primary,
+                                MaterialTheme.colorScheme.secondary
                             )
                         )
                     )
             ) {
-                Image(
-                    painter = painterResource(id = product.image),
+                AsyncImage(
+                    model = product.image,
                     contentDescription = null,
                     modifier = Modifier
                         .offset(y = imageSize / 2)
                         .clip(CircleShape)
                         .size(imageSize)
                         .align(Alignment.Center),
-                    contentScale = ContentScale.Crop
+                    contentScale = ContentScale.Crop,
+                    placeholder = painterResource(id = R.drawable.placeholder)
                 )
             }
 
@@ -107,5 +111,5 @@ fun ProductItem(product: Product) {
 @Preview
 @Composable
 private fun ProductItemPreview() {
-    ProductItem(Product("Pizza", BigDecimal(15.90), R.drawable.pizza))
+    ProductItem(sampleProducts[0])
 }
