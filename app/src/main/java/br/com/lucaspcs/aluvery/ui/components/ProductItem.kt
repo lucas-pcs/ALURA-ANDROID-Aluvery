@@ -1,6 +1,5 @@
 package br.com.lucaspcs.aluvery.ui.components
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -23,7 +22,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -35,7 +33,6 @@ import br.com.lucaspcs.aluvery.extensions.toBrazilianCurrency
 import br.com.lucaspcs.aluvery.model.Product
 import br.com.lucaspcs.aluvery.sampledata.sampleProducts
 import coil.compose.AsyncImage
-import java.math.BigDecimal
 
 @Composable
 fun ProductItem(product: Product) {
