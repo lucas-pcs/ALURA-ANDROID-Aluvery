@@ -8,6 +8,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import br.com.lucaspcs.aluvery.sampledata.sampleSections
+import br.com.lucaspcs.aluvery.ui.screens.AllProductsScreen
 import br.com.lucaspcs.aluvery.ui.screens.HomeScreen
 import br.com.lucaspcs.aluvery.ui.theme.AluveryTheme
 
@@ -31,5 +32,6 @@ class MainActivity : ComponentActivity() {
 @Preview(showSystemUi = true)
 @Composable
 private fun App() {
-    HomeScreen(sampleSections)
+    //HomeScreen(sampleSections)
+    AllProductsScreen()
 }

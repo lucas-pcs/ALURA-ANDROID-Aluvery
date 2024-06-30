@@ -62,6 +62,8 @@ val sampleProducts: List<Product> = listOf(
     ), *sampleDrinks.toTypedArray(), *sampleCandies.toTypedArray()
 )
 
+val sampleAllProducts = (sampleProducts + sampleDrinks + sampleCandies).distinct()
+
 val sampleSections = mapOf(
     "Promoções" to sampleProducts,
     "Doces" to sampleCandies,
