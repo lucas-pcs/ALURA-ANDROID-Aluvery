@@ -32,6 +32,6 @@ class MainActivity : ComponentActivity() {
 @Preview(showSystemUi = true)
 @Composable
 private fun App() {
-    //HomeScreen(sampleSections)
-    AllProductsScreen()
+    HomeScreen(sampleSections)
+    //AllProductsScreen()
 }
