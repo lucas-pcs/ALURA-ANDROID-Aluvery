@@ -33,7 +33,7 @@ fun AllProductsScreen() {
         }
 
         items(sampleAllProducts) { product ->
-            ProductItem(product = product)
+            ProductItem(product = product, Modifier)
         }
     }
 }

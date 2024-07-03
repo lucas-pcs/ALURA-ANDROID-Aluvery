@@ -31,11 +31,12 @@ import androidx.compose.ui.unit.sp
 import br.com.lucaspcs.aluvery.R
 import br.com.lucaspcs.aluvery.extensions.toBrazilianCurrency
 import br.com.lucaspcs.aluvery.model.Product
+import br.com.lucaspcs.aluvery.sampledata.sampleCandies
 import br.com.lucaspcs.aluvery.sampledata.sampleProducts
 import coil.compose.AsyncImage
 
 @Composable
-fun ProductItem(product: Product) {
+fun ProductItem(product: Product, modifier: Modifier) {
 
     val imageSize = 100.dp
 
@@ -44,7 +45,7 @@ fun ProductItem(product: Product) {
         shadowElevation = 4.dp
     ) {
         Column(
-            modifier = Modifier
+            modifier = modifier
                 .width(200.dp)
                 .heightIn(250.dp, 300.dp)
         ) {
@@ -108,5 +109,5 @@ fun ProductItem(product: Product) {
 @Preview
 @Composable
 private fun ProductItemPreview() {
-    ProductItem(sampleProducts[0])
+    ProductItem(sampleCandies[0], Modifier)
 }

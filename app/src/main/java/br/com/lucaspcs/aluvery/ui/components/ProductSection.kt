@@ -19,8 +19,8 @@ import br.com.lucaspcs.aluvery.sampledata.sampleProducts
 
 
 @Composable
-fun ProductSection(sectionName: String, products: List<Product>) {
-    Column(modifier = Modifier.padding(top = 8.dp, bottom = 8.dp)) {
+fun ProductSection(sectionName: String, products: List<Product>, modifier: Modifier) {
+    Column(modifier = modifier.padding(top = 8.dp, bottom = 8.dp)) {
 
         Text(
             text = sectionName, modifier = Modifier.padding(start = 16.dp),
@@ -35,7 +35,7 @@ fun ProductSection(sectionName: String, products: List<Product>) {
             contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
         ) {
             items(products) { product ->
-                ProductItem(product = product)
+                ProductItem(product = product, modifier = Modifier)
             }
         }
 
@@ -45,5 +45,5 @@ fun ProductSection(sectionName: String, products: List<Product>) {
 @Preview(showBackground = true, widthDp = 1000)
 @Composable
 private fun ProductSectionPreview() {
-    ProductSection("Promoções", sampleProducts)
+    ProductSection("Promoções", sampleProducts, Modifier)
 }
