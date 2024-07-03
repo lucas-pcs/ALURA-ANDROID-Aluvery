@@ -5,16 +5,24 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldColors
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -32,13 +40,34 @@ fun HomeScreen(
         var textVar by remember {
             mutableStateOf("")
         }
+
+
         OutlinedTextField(
             value = textVar,
             onValueChange = { newValue: String ->
                 Log.i("TAG", "HomeScreen: $newValue")
                 textVar = newValue
             },
+            modifier = Modifier
+                .align(alignment = Alignment.CenterHorizontally)
+                .padding(start = 16.dp, top = 16.dp, end = 16.dp)
+                .fillMaxWidth(),
+            shape = RoundedCornerShape(100),
+
+            // slot API
+            leadingIcon = {
+                Icon(Icons.Default.Search, contentDescription = "search icon")
+            },
+            label = {
+                Text(text = "Produto")
+            },
+            placeholder = {
+                Text(text = "O que você procura ?")
+            }
+
         )
+
+
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize(),
