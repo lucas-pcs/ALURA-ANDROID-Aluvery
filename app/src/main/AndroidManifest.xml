@@ -18,7 +18,8 @@
             android:name=".activities.ProductFormActivity"
             android:exported="true"
             android:label="@string/title_activity_product_form"
-            android:theme="@style/Theme.Aluvery">
+            android:theme="@style/Theme.Aluvery"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
