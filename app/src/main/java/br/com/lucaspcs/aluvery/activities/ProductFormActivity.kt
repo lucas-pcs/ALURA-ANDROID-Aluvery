@@ -37,6 +37,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.lucaspcs.aluvery.R
+import br.com.lucaspcs.aluvery.dao.ProductDao
 import br.com.lucaspcs.aluvery.model.Product
 import br.com.lucaspcs.aluvery.ui.theme.AluveryTheme
 import coil.compose.AsyncImage
@@ -44,6 +45,9 @@ import java.math.BigDecimal
 import java.text.DecimalFormat
 
 class ProductFormActivity : ComponentActivity() {
+
+    private val dao = ProductDao()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -53,7 +57,11 @@ class ProductFormActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    ProductFormScreen()
+                    ProductFormScreen(onSaveClick = {newProduct ->
+                        Log.d("TAG", "onCreate: save clicked")
+                        dao.save(newProduct)
+                        finish()
+                    })
                 }
             }
         }
@@ -61,7 +69,7 @@ class ProductFormActivity : ComponentActivity() {
 }
 
 @Composable
-fun ProductFormScreen(modifier: Modifier = Modifier) {
+fun ProductFormScreen(onSaveClick: (Product) -> Unit = {}, modifier: Modifier = Modifier) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -184,6 +192,9 @@ fun ProductFormScreen(modifier: Modifier = Modifier) {
                 )
 
                 Log.d("ProductFormActivity", "ProductFormScreen: $newProduct")
+
+                onSaveClick(newProduct)
+
             },
             modifier = Modifier.fillMaxWidth()
         ) {
